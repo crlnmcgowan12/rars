@@ -1,0 +1,19 @@
+    .data                   # Data section
+str:    .asciiz "Hello, World!"  # Define the string "Hello, World!"
+
+    .text                   # Code section
+    .globl main             # Make main a global label so it can be the entry point
+
+main:   
+    # Load the address of the string into register a0 (first argument to syscall)
+    la   a0, str            # Load address of "str" into register a0
+
+    # Load the syscall number for printing a string (syscall 4) into register a7
+    li   a7, 4              # Load immediate value 4 into register a7 (syscall for print_string)
+
+    # Make the syscall to print the string
+    ecall                   # Make the system call (prints the string)
+
+    # Exit the program (syscall 10)
+    li   a7, 10             # Load immediate value 10 into register a7 (syscall for exit)
+    ecall                   # Make the system call (exits the program)
